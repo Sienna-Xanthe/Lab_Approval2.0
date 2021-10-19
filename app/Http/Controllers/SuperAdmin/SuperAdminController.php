@@ -32,56 +32,55 @@ class SuperAdminController extends Controller
      * 表单数量
      */
     //表单数量统计-总数
-    public function getCount(){
-        $res =SuperAdminForm::yjx_getCount();
-        if ($res==0){
-            $a='0';
-            $res=1;
-        }
-        return $res ?
-            json_success('查询成功!', $a, 200) :
-            json_fail('查询失败!', null, 100);
-    }
-    //表单数量统计-待审批
-    public function  getPending(){
-        $res =SuperAdminForm::yjx_getPending();
-        if ($res==0){
-            $a='0';
-            $res=1;
-        }
-        return $res ?
-            json_success('查询成功!', $a, 200) :
-            json_fail('查询失败!', null, 100);
-    }
-    //表单数量统计-未通过
-    public function getNotThrough(){
-        $res =SuperAdminForm::yjx_getNotThrough();
-          if ($res==0){
-            $a='0';
-            $res=1;
-          }
-        return  $res ?
-            json_success('查询成功!',$a, 200) :
-            json_fail('查询失败!',null, 100);
-    }
-    //表单数量统计-已通过
-    public  function getThrough(){
-        $res =SuperAdminForm::yjx_getThrough();
-        if ($res==0){
-            $a='0';
-            $res=1;
-        }
-        return $res ?
-            json_success('查询成功!', (int)$a, 200) :
-            json_fail('查询失败!', null, 100);
-    }
-    //表单数量统计-审批中
-    public  function getThroughing(){
-        $res =SuperAdminForm::yjx_getThroughing();
+//    public function getCount(){
+//        $res =SuperAdminForm::yjx_getCount();
+//        return $res ?
+//            json_success('查询成功!', $res, 200) :
+//            json_fail('查询失败!', null, 100);
+//    }
+//    表单审批-5个状态
+    public function  getState(){
+        $res['0'] =SuperAdminForm::yjx_getCount();//全部
+        $res['1'] =SuperAdminForm::yjx_getPending();//待审批
+        $res['2'] =SuperAdminForm::yjx_getNotThrough();//未通过
+        $res['3'] =(int)SuperAdminForm::yjx_getThrough();//已通过
+        $res['4'] =(int)SuperAdminForm::yjx_getThroughing();//审批中
         return $res ?
             json_success('查询成功!', $res, 200) :
             json_fail('查询失败!', null, 100);
     }
+//    //表单数量统计-待审批
+//    public function  getPending(){
+//        $res =SuperAdminForm::yjx_getPending();
+//        return $res ?
+//            json_success('查询成功!', $res, 200) :
+//            json_fail('查询失败!', null, 100);
+//    }
+//    //表单数量统计-未通过
+//    public function getNotThrough(){
+//        $res =SuperAdminForm::yjx_getNotThrough();
+//        return  $res ?
+//            json_success('查询成功!',$res, 200) :
+//            json_fail('查询失败!',null, 100);
+//    }
+//    //表单数量统计-已通过
+//    public  function getThrough(){
+//        $res =SuperAdminForm::yjx_getThrough();
+//        if ($res==0){
+//            $a='0';
+//            $res=1;
+//        }
+//        return $res ?
+//            json_success('查询成功!', (int)$a, 200) :
+//            json_fail('查询失败!', null, 100);
+//    }
+//    //表单数量统计-审批中
+//    public  function getThroughing(){
+//        $res =SuperAdminForm::yjx_getThroughing();
+//        return $res ?
+//            json_success('查询成功!', $res, 200) :
+//            json_fail('查询失败!', null, 100);
+//    }
     /***
      * 表单管理
      * 查看申请表-展示和下拉框的全部

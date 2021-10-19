@@ -52,11 +52,12 @@ Route::middleware('superadmin.check')->prefix('test22')->group(function (){
  * 超级管理员模块
  */
 Route::prefix('super')->group(function () {
-    Route::get('getcount','SuperAdmin\SuperAdminController@getCount'); //表单数量统计-总数
-    Route::get('getpending','SuperAdmin\SuperAdminController@getPending');//表单数量统计-待审批
-    Route::get('getnot','SuperAdmin\SuperAdminController@getNotThrough');//表单数量统计未通过
-    Route::get('getpass','SuperAdmin\SuperAdminController@getThrough'); //表单数量统计已通过
-    Route::get('getting','SuperAdmin\SuperAdminController@getThroughing'); //表单数量统计审批中
+    Route::get('getcounts','SuperAdmin\SuperAdminController@getState'); //表单数量统计-总数
+//    Route::get('getcount','SuperAdmin\SuperAdminController@getCount'); //表单数量统计-总数
+//    Route::get('getpending','SuperAdmin\SuperAdminController@getPending');//表单数量统计-待审批
+//    Route::get('getnot','SuperAdmin\SuperAdminController@getNotThrough');//表单数量统计未通过
+//    Route::get('getpass','SuperAdmin\SuperAdminController@getThrough'); //表单数量统计已通过
+//    Route::get('getting','SuperAdmin\SuperAdminController@getThroughing'); //表单数量统计审批中
     Route::get('queryform','SuperAdmin\SuperAdminController@queryFormAll');//表单管理-查看申请表-展示和下拉框的全部
     Route::get('formboxs','SuperAdmin\SuperAdminController@formComboBoxs');//表单管理-下拉框查询--名字和状态
    // Route::get('formboxf','SuperAdmin\SuperAdminController@formComboBoxf');//表单管理-下拉框查询-表单名称
