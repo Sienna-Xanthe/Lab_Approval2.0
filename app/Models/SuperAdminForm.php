@@ -101,7 +101,10 @@ class SuperAdminForm extends Model
      */
     public static function yjx_getFormAll(){
         try {
-            $res = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')->get();
+            $res = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
+                ->get();
             return $res ?
                 $res :
                 false;
@@ -116,7 +119,9 @@ class SuperAdminForm extends Model
      */
     public static function yjx_getFormComboBoxP($form_name_id){
         try {
-            $res = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",0)
                 ->where('form_name_id',$form_name_id)
                 ->get();
@@ -133,13 +138,19 @@ class SuperAdminForm extends Model
      */
     public static function yjx_getFormComboBoxNot($form_name_id){
         try {
-            $res1 = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res1 = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",1)->where('form_name_id',$form_name_id)
                 ->get();
-            $res2 = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res2 = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",2)->where("form_state2",1)->where('form_name_id',$form_name_id)
                 ->get();
-            $res3 = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res3 = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",2)->where("form_state2",2)->where("form_state3",1)
                 ->where('form_name_id',$form_name_id)->get();
             $res['res1']=$res1;
@@ -158,8 +169,9 @@ class SuperAdminForm extends Model
      */
     public static function yjx_getFormComboBoxYes($form_name_id){
         try {
-            $res = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
-                ->where("form_state3",2)->where('form_name_id',$form_name_id)
+            $res = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')->where("form_state3",2)->where('form_name_id',$form_name_id)
                 ->get();
             return $res ?
                 $res :
@@ -174,10 +186,14 @@ class SuperAdminForm extends Model
      */
     public static function yjx_getFormComboBoxing($form_name_id){
         try {
-            $res1 = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res1 =self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",2)->where("form_state2",0)
                 ->where('form_name_id',$form_name_id)->get();
-            $res2 = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res2 =self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_state1",2)->where("form_state2",2)->where("form_state3",0)
                 ->where('form_name_id',$form_name_id)->get();
             $res['res1']=$res1;
@@ -213,7 +229,9 @@ class SuperAdminForm extends Model
     public static function yjx_getSearch($request){
         $form_id=$request['form_id'];
         try {
-            $res = self::select("form_id","form_name_id","created_at","form_state1","form_state2","form_state3",'form_state4')
+            $res = self::select("form_id","form_name.form_names","form.created_at","form_state1",
+                "form_state2","form_state3",'form_state4')
+                ->join('form_name','form_name.id','=','form.form_name_id')
                 ->where("form_id",$form_id)->get();
             return $res ?
                 $res :
@@ -228,27 +246,64 @@ class SuperAdminForm extends Model
      * 查看
      */
     public static function yjx_lookForm($request){
-        $step1=$request['form_name_id'];
         $step2=$request['form_id'];
         try {
+                $step1=self::where('form_id',$step2)->value('form_name_id');
+            $step3=self::select('reason_id')->where('form_id',$step2)->value('reason_id');
+             if ($step3!=''){
             if ($step1==1){
-                $res=SuperAdminOpen::select( "open_usereason", "open_projectname", "open_usetime1",
-                    "open_usetime2", "open_applicant", "applicant_name", "applicant_id", "applicant_phone",
-                    "applicant_work"
-                )->join('applicant','applicant.open_id','=','id')
-                    ->where('form_id',$step2)->get();
-            }elseif ($step1==2){
                 $res=SuperAdminEquipment::select( "equipment_department", "equipment_use", "equipment_usetime1",
                     "equipment_usetime2", "equipment_applicant", "equipment_phone", "inventory_name",
-                    "inventory_model", "list_number", "list_attachment"
-                )->join('list','list.equipment_id','equipment.id')
+                    "inventory_model", "list_number", "list_attachment",'form_name1','form_time1',
+                    'form_name2','form_time2','form_name3','form_time3','reasons'
+                )->join('form','form.form_id','=','equipment.form_id')
+                    ->join('list','list.equipment_id','equipment.id')
                     ->join('inventory','inventory.id','=','list.inventory_id')
-                    ->where('form_id',$step2)->get();
-            }else{
+                    ->join('reason','reason.id','=','form.reason_id')
+                    ->where('equipment.form_id',$step2)->get();
+            }elseif ($step1==2){
+
                 $res=SuperAdminBorrow::select("borrow_time", "borrow_lname", "borrow_lid", "borrow_cname",
-                    "borrow_number",'borrow_goal','borrow_promise','borrow_applicant','borrow_phone')
-                    ->where('form_id',$step2)->get();
+                    "borrow_number",'borrow_goal','borrow_promise','borrow_applicant','borrow_phone',
+                    'form_name1','form_time1','form_name2','form_time2','form_name3','form_time3','reasons')
+                    ->join('form','form.form_id','=','borrow.form_id')
+                    ->join('reason','reason.id','=','form.reason_id')
+                    ->where('borrow.form_id',$step2)->get();
+            }else{
+                $res=SuperAdminOpen::select( "open_usereason", "open_projectname", "open_usetime1",
+                    "open_usetime2", "open_applicant", "applicant_name", "applicant_id", "applicant_phone",
+                    "applicant_work", 'form_name1','form_time1','form_name2','form_time2','form_name3','form_time3',
+                    'reasons'
+                )   ->join('form','form.form_id','=','open.form_id')
+                    ->join('applicant','applicant.open_id','=','open.id')
+                    ->join('reason','reason.id','=','form.reason_id')
+                    ->where('open.form_id',$step2)->get();
             }
+             }else{
+            if ($step1==1){
+                $res=SuperAdminEquipment::select( "equipment_department", "equipment_use", "equipment_usetime1",
+                    "equipment_usetime2", "equipment_applicant", "equipment_phone", "inventory_name",
+                    "inventory_model", "list_number", "list_attachment",'form_name1','form_time1',
+                    'form_name2','form_time2','form_name3','form_time3'
+                   )->join('form','form.form_id','=','equipment.form_id')
+                    ->join('list','list.equipment_id','equipment.id')
+                    ->join('inventory','inventory.id','=','list.inventory_id')
+                    ->where('equipment.form_id',$step2)->get();
+              }elseif ($step1==2){
+                $res=SuperAdminBorrow::select("borrow_time", "borrow_lname", "borrow_lid", "borrow_cname",
+                    "borrow_number",'borrow_goal','borrow_promise','borrow_applicant','borrow_phone',
+                'form_name1','form_time1','form_name2','form_time2','form_name3','form_time3')
+                    ->join('form','form.form_id','=','borrow.form_id')
+                    ->where('borrow.form_id',$step2)->get();
+            }else{
+                $res=SuperAdminOpen::select( "open_usereason", "open_projectname", "open_usetime1",
+                    "open_usetime2", "open_applicant", "applicant_name", "applicant_id", "applicant_phone",
+                    "applicant_work", 'form_name1','form_time1','form_name2','form_time2','form_name3','form_time3'
+                )   ->join('form','form.form_id','=','open.form_id')
+                    ->join('applicant','applicant.open_id','=','open.id')
+                    ->where('open.form_id',$step2)->get();
+            }
+             }
             return $res ?
                 $res :
                 false;

@@ -28,7 +28,7 @@ class formLookRequest extends FormRequest
         return [
             //
             'form_id'=>'required',
-            'form_name_id'=>'required',
+//            'form_name_id'=>'required',
         ];
     }
     protected function failedValidation(Validator $validator)
