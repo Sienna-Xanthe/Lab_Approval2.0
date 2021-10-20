@@ -8,12 +8,9 @@ use App\Http\Requests\SuperAdmin\renewAdminStateRequest;
 use App\Http\Requests\SuperAdmin\showAllPositionRequest;
 use App\Http\Requests\SuperAdmin\showAllRequest;
 use App\Http\Requests\SuperAdmin\showInfoByNameRequest;
-use App\Http\Requests\UserInfo\addAdminRequest;
 use App\Models\Account;
 use App\Models\Imformatioin;
 use App\Models\Login;
-use App\Models\Student;
-use App\Models\UserInfo;
 use Illuminate\Http\Request;
 
 class ManagementStuController
@@ -125,11 +122,8 @@ class ManagementStuController
         $a  = Login::insertAdmin($position, $number, $password);
         $b  = json_decode($a);
         $id = $b[count($b) - 1]->id;
-        $aid=Login::lyt_getAid($id);
-        echo $aid;
         $res = Imformatioin::insertAdmin($id, $name, $email, $phone);
 
-//        Account::lyt_addAdminState2($aid);
         return $res ?
             json_success('添加成功!', $res, 200) :
             json_fail('添加失败!', null, 100);

@@ -125,6 +125,8 @@ class Login extends Model
     {
         try {
             $res = self::insert([
+                'login.account_id'=>3,
+
                 'login.position_id'  => $position,
                 'login.login_number' => $number,
                 'login.password'     => $password,
@@ -149,12 +151,13 @@ class Login extends Model
      * id获取account_id
      * @return false
      */
-    public static function lyt_getAid($id)
+    public static function lyt_insertAid($id)
     {
         try {
             $res = self::where('login.id', '=', $id)
-                ->select('account_id')
-                ->get();
+                ->insert([
+                    'account_id'=>3
+                ]);
             return $res ?
                 $res :
                 false;
