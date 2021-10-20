@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Imformatioin extends Model
+class SuperAdminBorrow extends Model
 {
-    protected $table = "register";
+    //borrow
+    protected $table = "borrow";
     public $timestamps = true;
     protected $primaryKey = "id";
     protected $guarded = [];
