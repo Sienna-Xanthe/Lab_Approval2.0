@@ -38,9 +38,24 @@ Route::middleware('student.check')->prefix('test')->group(function (){
 /**
  * 普通管理员test
  */
-//middleware('ordinadmin.check')->
-Route::prefix('test11')->group(function (){
+Route::middleware('ordinadmin.check')->prefix('test11')->group(function (){
     Route::post('admin','Login\LoginController@admin');
+
+});
+
+/**
+ * 超级管理员test
+ */
+Route::middleware('superadmin.check')->prefix('test22')->group(function (){
+    Route::post('superadmin','Login\LoginController@superadmin');
+
+});
+
+
+/**
+ * 普通管理员相应功能
+ */
+Route::prefix('admin')->group(function (){
 
     Route::post('add', 'OrdinAdmin\CheckController@zqz_add'); //添加期末教学记录检查
     Route::get('select', 'OrdinAdmin\CheckController@zqz_select'); //查询所有的期末教学记录检查
@@ -53,15 +68,13 @@ Route::prefix('test11')->group(function (){
     Route::get('adpttl', 'OrdinAdmin\FromReviewController@zqz_adoptTotal'); //管理员查询表单中待审批，未通过，已通过的表单数量
 });//zqz
 
+
 /**
- * 超级管理员test
+ * 超级管理员中实验室管理部分
  */
-Route::middleware('superadmin.check')->prefix('test22')->group(function (){
-    Route::post('superadmin','Login\LoginController@superadmin');
+Route::prefix('superadmin')->group(function (){
 
     Route::post('name', 'SuperAdmin\LabController@zqz_name'); //超级管理员通过实验名称查看所有实验室
     Route::post('add', 'SuperAdmin\LabController@zqz_add'); //超级管理员新增实验室
     Route::post('enable', 'SuperAdmin\LabController@zqz_enable'); //超级管理员新增实验室
-    //zqz
-
-});
+}); //zqz
