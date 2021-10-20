@@ -40,11 +40,11 @@ class SuperAdminController extends Controller
 //    }
 //    表单审批-5个状态
     public function  getState(){
-        $res['0'] =SuperAdminForm::yjx_getCount();//全部
-        $res['1'] =SuperAdminForm::yjx_getPending();//待审批
-        $res['2'] =SuperAdminForm::yjx_getNotThrough();//未通过
-        $res['3'] =(int)SuperAdminForm::yjx_getThrough();//已通过
-        $res['4'] =(int)SuperAdminForm::yjx_getThroughing();//审批中
+        $res['total'] =SuperAdminForm::yjx_getCount();//全部
+        $res['pending'] =SuperAdminForm::yjx_getPending();//待审批
+        $res['not'] =SuperAdminForm::yjx_getNotThrough();//未通过
+        $res['pass'] =(int)SuperAdminForm::yjx_getThrough();//已通过
+        $res['ing'] =(int)SuperAdminForm::yjx_getThroughing();//审批中
         return $res ?
             json_success('查询成功!', $res, 200) :
             json_fail('查询失败!', null, 100);

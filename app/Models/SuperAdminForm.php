@@ -256,7 +256,7 @@ class SuperAdminForm extends Model
                     "equipment_usetime2", "equipment_applicant", "equipment_phone", "inventory_name",
                     "inventory_model", "list_number", "list_attachment",'form_name1','form_time1',
                     'form_name2','form_time2','form_name3','form_time3','reasons'
-                )->join('form','form.form_id','=','equipment.form_id')
+                )   ->join('form','form.form_id','=','equipment.form_id')
                     ->join('list','list.equipment_id','equipment.id')
                     ->join('inventory','inventory.id','=','list.inventory_id')
                     ->join('reason','reason.id','=','form.reason_id')
@@ -322,7 +322,9 @@ class SuperAdminForm extends Model
             $res = self::where("form_id",$id)
                 ->update(
                     [
-                        'form_state4'=>1
+                        'form_state4'=>1,
+                        'form_state1'=>1,
+
                     ]
                 );
             return $res ?
