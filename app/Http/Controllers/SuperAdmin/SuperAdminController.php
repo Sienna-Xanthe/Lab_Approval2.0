@@ -134,7 +134,7 @@ class SuperAdminController extends Controller
             json_fail('操作失败!', null, 100);
     }
     //查看-申请表
-//    字段 form_id    form_name_id
+//    字段 form_id
     public function formLookApply(formLookRequest $request){
         $res=SuperAdminForm::yjx_lookForm($request);
         return $res ?
@@ -244,16 +244,16 @@ class SuperAdminController extends Controller
         $res=SuperAdminList::yjx_inventoryNameModel($request);
 
         return $res ?
-            json_success('操作成功!', $res, 200) :
-            json_fail('操作失败!', null, 100);
+            json_success('查找成功!', $res, 200) :
+            json_fail('查找失败!', null, 100);
     }
     //设备归还校验-表单编号查询
     //    字段 id
     public function inventory_id(idRequest $request){
         $res=SuperAdminList::yjx_inventoryId($request);
         return $res ?
-            json_success('操作成功!', $res, 200) :
-            json_fail('操作失败!', null, 100);
+            json_success('查找成功!', $res, 200) :
+            json_fail('查找失败!', null, 100);
     }
     //设备归还校验-归还
     //    字段 id

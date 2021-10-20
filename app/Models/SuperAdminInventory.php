@@ -35,7 +35,7 @@ class SuperAdminInventory extends Model
     public static function yjx_modelShow($request){
         try {
             $res=self::select("id","inventory_name","inventory_model",
-                'inventory_sum','inventory_inventory','inventory_attachment')
+                'inventory_sum','inventory_inventory')
                 ->where('inventory_name',$request['inventory_name'])->get();
             return $res?
                 $res :

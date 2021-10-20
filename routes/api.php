@@ -53,22 +53,17 @@ Route::middleware('superadmin.check')->prefix('test22')->group(function (){
  */
 Route::prefix('super')->group(function () {
     Route::get('getcounts','SuperAdmin\SuperAdminController@getState'); //表单数量统计-总数
-//    Route::get('getcount','SuperAdmin\SuperAdminController@getCount'); //表单数量统计-总数
-//    Route::get('getpending','SuperAdmin\SuperAdminController@getPending');//表单数量统计-待审批
-//    Route::get('getnot','SuperAdmin\SuperAdminController@getNotThrough');//表单数量统计未通过
-//    Route::get('getpass','SuperAdmin\SuperAdminController@getThrough'); //表单数量统计已通过
-//    Route::get('getting','SuperAdmin\SuperAdminController@getThroughing'); //表单数量统计审批中
     Route::get('queryform','SuperAdmin\SuperAdminController@queryFormAll');//表单管理-查看申请表-展示和下拉框的全部
     Route::get('formboxs','SuperAdmin\SuperAdminController@formComboBoxs');//表单管理-下拉框查询--名字和状态
-   // Route::get('formboxf','SuperAdmin\SuperAdminController@formComboBoxf');//表单管理-下拉框查询-表单名称
     Route::get('formlook','SuperAdmin\SuperAdminController@formSearch');//表单管理-搜索框 表单编号
     Route::get('formlooka','SuperAdmin\SuperAdminController@formLookApply');//查看-申请表
     Route::post('termination','SuperAdmin\SuperAdminController@termination');//表单管理-终止功能
     Route::get('formexport','SuperAdmin\SuperAdminController@formExport');//表单管理-表单审批-导出
     Route::get('formsr','SuperAdmin\SuperAdminController@formShowRecord');//展示-记录表
     Route::get('inshow','SuperAdmin\SuperAdminController@inventoryShow');//设备管理-展示
-    Route::get('inmodels','SuperAdmin\SuperAdminController@inventory_modelName');//设备管理-下拉框-名称
+    Route::get('inmodels','SuperAdmin\SuperAdminController@inventory_modelName');//设备管理-下拉框-型号
     Route::get('inids','SuperAdmin\SuperAdminController@inventory_idShow');//设备管理-搜索框-表单编号
+
     Route::post('inadd','SuperAdmin\SuperAdminController@inventory_add');//设备管理-新增
     Route::post('inupdate','SuperAdmin\SuperAdminController@inventory_update');//设备管理-修改
     Route::post('indelete','SuperAdmin\SuperAdminController@inventory_delete');//设备管理-删除
