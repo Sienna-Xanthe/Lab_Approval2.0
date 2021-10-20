@@ -48,3 +48,28 @@ Route::middleware('ordinadmin.check')->prefix('test11')->group(function (){
 Route::middleware('superadmin.check')->prefix('test22')->group(function (){
     Route::post('superadmin','Login\LoginController@superadmin');
 });
+/**
+ * 表单管理操作
+ */
+Route::prefix('stu')->group(function (){
+    Route::post('equipmentadd','StuAdmin\StuController@equipment_add');   //设备借用记录表添加
+    Route::post('equipmentchange','StuAdmin\StuController@equipment_change');   //设备借用记录表添加
+    Route::post('equipmentdelete','StuAdmin\StuController@equipment_delete');   //设备借用记录表撤销
+    Route::post('equipmentlook','StuAdmin\StuController@equipment_look');   //设备借用记录表查询
+
+    Route::post('borrowadd','StuAdmin\StuController@borrow_add');   //实验室借用表表添加
+    Route::post('borrowchange','StuAdmin\StuController@borrow_change');   //实验室借用表添加
+    Route::post('borrowdelete','StuAdmin\StuController@borrow_delete');   //实验室借用表撤销
+    Route::post('borrowlook','StuAdmin\StuController@borrow_look');   //实验室借用表查询
+
+    Route::post('openadd','StuAdmin\StuController@open_add');   //开放实验室借用表添加
+    Route::post('openchange','StuAdmin\StuController@open_change');   //开放实验室借用表添加
+    Route::post('opendelete','StuAdmin\StuController@open_delete');   //开放实验室借用表撤销
+    Route::post('openlook','StuAdmin\StuController@open_look');   //开放实验室借用表查询
+
+    Route::post('runadd','StuAdmin\StuController@run_add');   //实验室运行记录表添加
+    Route::post('runlook','StuAdmin\StuController@run_look');   //实验室运行记录表查询
+
+    Route::post('find','StuAdmin\StuController@find');   //实验室运行记录表添加
+    Route::post('find1','StuAdmin\StuController@find1');   //实验室运行记录表查询
+});//--wzh
