@@ -26,8 +26,16 @@ class Lab extends Model
         try {
 
             $a=strtotime("now");
-            $cc=self::join('time','time.lab_id','=','lab.id')->select('lab.id','lab_state1','time_start_time','time_end_time')->get();
 
+            $a1=strtotime(Open::where('id','=','1')->value('open_usetime1'));
+            $a2=strtotime(Open::where('id','=','1')->value('open_usetime2'));
+
+            if ($a>=$a1&&$a<=$a2){
+                self::where('id','=','1')->update(['lab_state1'=>'1']);
+            }
+
+            $cc=self::join('time','time.lab_id','=','lab.id')
+                ->select('lab.id','lab_state1','time_start_time','time_end_time')->get();
             foreach ($cc as $item) {
                 $b=strtotime($item->time_start_time);
                 $c=strtotime($item->time_end_time);
