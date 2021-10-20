@@ -52,21 +52,29 @@ class ManagementStuController
     public function renewAdminState(renewAdminStateRequest $request)
     {
         $number  = $request['number'];
-        $a       = Login::lyt_getAdminState($number);
-        $b       = json_decode($a);
-        $stateId = $b[0]->account_state1;
-        $aid       = Login::lyt_getUserAid($number);
-        $bid       = json_decode($aid);
-        $accountId = $bid[0]->account_id;
+        $aid       = Login::lyt_getAdminState($number);
+//        $b       = json_decode($a);
+//        $stateId = $b[0]->account_state1;
+//        $aid       = Login::lyt_getUserAid($number);
+//        $bid       = json_decode($aid);
+//        $accountId = $bid[0]->account_id;
+
         $s = "";
 
-        if ($stateId == 1) {
-            $s = 0;
-        } elseif ($stateId == 0) {
+        if ($aid == 1) {
+            $s = 2;
+        } elseif ($aid == 2) {
             $s = 1;
         }
 
-        $res = Account::lyt_updateAdminState2($accountId, $s);
+        if ($aid == 3) {
+            $s = 4;
+        } elseif ($aid == 4) {
+            $s = 3;
+        }
+
+
+        $res = Login::lyt_updateAdminState2($number, $s);
 
         return $res ?
             json_success('更新状态成功!', $res, 200) :

@@ -11,6 +11,25 @@ class Login extends Model
     public $timestamps = true;
     public $hidden = ['password'];
 
+//    /**
+//     * 得到用户的状态
+//     * @param $aid
+//     */
+//    public static function lyt_getAccount($id)
+//    {
+//        try {
+//            $res = self::join('account', 'account.id', 'account_id')
+//                ->where('login.id', '=', $id)
+//                ->get('account.account_state2');
+//            return $res ?
+//                $res :
+//                false;
+//        } catch (\Exception $e) {
+//            logError('搜索错误', [$e->getMessage()]);
+//            return false;
+//        }
+//    }
+
     /**
      * 得到用户的状态
      * @param $aid
@@ -18,9 +37,8 @@ class Login extends Model
     public static function lyt_getAccount($id)
     {
         try {
-            $res = self::join('account', 'account.id', 'account_id')
-                ->where('login.id', '=', $id)
-                ->get('account.account_state2');
+            $res = self::where('login.id', '=', $id)
+                ->get('login.account_id');
             return $res ?
                 $res :
                 false;
@@ -52,6 +70,27 @@ class Login extends Model
         }
     }
 
+//    /**
+//     * 查看管理员的状态
+//     * @return false
+//     */
+//    public static function lyt_getAdminState($number)
+//    {
+//        try {
+//            $res = self::join('account', 'account.id', 'account_id')
+//                ->where('login_number', '=', $number)
+//                ->select('account.account_state1')
+//                ->get();
+//
+//            return $res ?
+//                $res :
+//                false;
+//        } catch (\Exception $e) {
+//            logError('搜索错误', [$e->getMessage()]);
+//            return false;
+//        }
+//    }
+
     /**
      * 查看管理员的状态
      * @return false
@@ -59,10 +98,8 @@ class Login extends Model
     public static function lyt_getAdminState($number)
     {
         try {
-            $res = self::join('account', 'account.id', 'account_id')
-                ->where('login_number', '=', $number)
-                ->select('account.account_state1')
-                ->get();
+            $res = self::where('login_number', '=', $number)
+                ->value('login.account_id');
 
             return $res ?
                 $res :
@@ -167,5 +204,52 @@ class Login extends Model
         }
     }
 
+    /**
+     * 更新管理员状态
+     * @param $id
+     * @param $newPassword
+     * @return false
+     */
+    public static function lyt_updateAdminState2($number, $s)
+    {
+        try {
+            $res = self::where([
+                'login_number' => $number,
+            ])
+                ->update([
+                    'account_id' => $s
+                ]);
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+
+    /**
+     * 更新管理员状态
+     * @param $id
+     * @param $newPassword
+     * @return false
+     */
+    public static function lyt_updateAdminState($id, $sta)
+    {
+        try {
+            $res = self::where([
+                'id' => $id,
+            ])
+                ->update([
+                    'account_id' => $sta
+                ]);
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
 
 }

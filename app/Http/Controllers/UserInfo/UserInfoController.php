@@ -100,9 +100,9 @@ class UserInfoController extends Controller
      */
     public
     function skipRoute(skipRouteRequest $request) {
-        $aid = auth('api')->user()->account_id;
-        $sta = 1;
-        $res = Account::lyt_updateAdminState($aid, $sta);
+        $id = auth('api')->user()->id;
+        $sta = 3;
+        $res = Login::lyt_updateAdminState($id, $sta);
         return $res ?
             json_success('状态码更改成功!', $res, 200) :
             json_fail('状态码更改失败!', null, 100);
