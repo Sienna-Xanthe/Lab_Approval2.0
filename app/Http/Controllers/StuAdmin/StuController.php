@@ -37,7 +37,7 @@ class StuController extends Controller
     public function equipment_add(Equipmentadd $request)
     {
         $form_id = 'A'.date("ymdis");    //获取form_id编号
-        $form_name_id='2';
+        $form_name_id='1';
         $login_id = 2;     //获取学生的login_id
         $form_state1=0;
         $form_state2=0;
@@ -151,7 +151,7 @@ class StuController extends Controller
     public function borrow_add(BorrowAdd $request)
     {
         $form_id = 'B'.date("ymdis");    //获取form_id编号
-        $form_name_id='3';
+        $form_name_id='2';
         $login_id = 2;     //获取学生的login_id
         $form_state1=0;
         $form_state2=0;
