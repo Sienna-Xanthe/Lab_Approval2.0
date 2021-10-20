@@ -48,6 +48,32 @@ Route::middleware('ordinadmin.check')->prefix('test11')->group(function (){
 Route::middleware('superadmin.check')->prefix('test22')->group(function (){
     Route::post('superadmin','Login\LoginController@superadmin');
 });
+
+/***
+ * 超级管理员模块
+ */
+Route::prefix('super')->group(function () {
+    Route::get('getcounts','SuperAdmin\SuperAdminController@getState'); //表单数量统计-总数
+    Route::get('queryform','SuperAdmin\SuperAdminController@queryFormAll');//表单管理-查看申请表-展示和下拉框的全部
+    Route::get('formboxs','SuperAdmin\SuperAdminController@formComboBoxs');//表单管理-下拉框查询--名字和状态
+    Route::get('formlook','SuperAdmin\SuperAdminController@formSearch');//表单管理-搜索框 表单编号
+    Route::get('formlooka','SuperAdmin\SuperAdminController@formLookApply');//查看-申请表
+    Route::post('termination','SuperAdmin\SuperAdminController@termination');//表单管理-终止功能
+    Route::get('formexport','SuperAdmin\SuperAdminController@formExport');//表单管理-表单审批-导出
+    Route::get('formsr','SuperAdmin\SuperAdminController@formShowRecord');//展示-记录表
+    Route::get('inshow','SuperAdmin\SuperAdminController@inventoryShow');//设备管理-展示
+    Route::get('inmodels','SuperAdmin\SuperAdminController@inventory_modelName');//设备管理-下拉框-型号
+    Route::get('inids','SuperAdmin\SuperAdminController@inventory_idShow');//设备管理-搜索框-表单编号
+
+    Route::post('inadd','SuperAdmin\SuperAdminController@inventory_add');//设备管理-新增
+    Route::post('inupdate','SuperAdmin\SuperAdminController@inventory_update');//设备管理-修改
+    Route::post('indelete','SuperAdmin\SuperAdminController@inventory_delete');//设备管理-删除
+    Route::get('inname','SuperAdmin\SuperAdminController@inventory_nameModel');//设备归还校验-名称型号下拉框
+    Route::get('inid','SuperAdmin\SuperAdminController@inventory_id');//设备归还校验-表单编号查询
+    Route::post('inre','SuperAdmin\SuperAdminController@inventory_return');//设备归还校验-归还
+});//yjx
+
+
 /**
  * 表单管理操作
  */
@@ -73,3 +99,4 @@ Route::prefix('stu')->group(function (){
     Route::get('find','StuAdmin\StuController@find');   //实验室运行记录表添加
     Route::get('find1','StuAdmin\StuController@find1');   //实验室运行记录表查询
 });//--wzh
+
