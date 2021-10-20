@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\AsdRequest;
 use App\Http\Requests\UserInfo\LoginRequest;
 use App\Http\Requests\UserInfo\Registered;
 use App\Models\Positionform;
@@ -111,10 +112,6 @@ class LoginController extends Controller
                 json_success('注册失败!该工号已经注册过了！',null,100  ) ;
         }
 
-
-
-
-
     }
     protected function userHandle($request)
     {
@@ -131,8 +128,8 @@ class LoginController extends Controller
     public function position(){
         $data = Positionform::position();
         return $data ?
-        json_success('注册成功!',$data,200  ) :
-                    json_success('注册失败!',null,100  ) ;
+        json_success('查询成功!',$data,200  ) :
+                    json_success('查询失败!',null,100  ) ;
     }
 
 
@@ -140,17 +137,34 @@ class LoginController extends Controller
      * 测试
      * @param Request $request
      */
-    public function test(Request $request){
+    public function test(AsdRequest $request){
+
         $id = Auth::id();
-        echo $id;
+        echo "\nid: ".$id;
+        $asd = $request['asd'];
+        echo "\nasd: ".$asd."\n";
     }
     public function admin(Request $request){
-    $id = Auth::id();
-    echo "你好普通管理员！";
+    echo "\n你好普通管理员！";
 }
     public function superadmin(Request $request){
         $id = Auth::id();
         echo "你好超级管理员！";
+    }
+
+    public function asd(AsdRequest $request){
+        if(Auth::user() == null)
+        {
+            echo "没有token传入！\n";
+        }
+        else
+        echo Auth::user();
+        $asd = $request['asd'];
+        echo "\nasd: ".$asd."\n";
+
+        $pass = $request['pass'];
+        echo "pass: ".$pass."\n";
+        echo "password加密：".bcrypt($pass);
     }
 
 }

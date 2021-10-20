@@ -25,7 +25,7 @@ Route::prefix('user')->group(function () {
     Route::post('login', 'Login\LoginController@login')->middleware('auth.rolecheck'); //登录
     Route::post('logout', 'Login\LoginController@logout'); //退出登录
     Route::post('registered', 'Login\LoginController@registered'); //注册
-    Route::post('position','Login\LoginController@position');//职位显示
+    Route::get('position','Login\LoginController@position');//职位显示
 });//--pxy
 
 /**
@@ -38,7 +38,7 @@ Route::middleware('student.check')->prefix('test')->group(function (){
 /**
  * 普通管理员test
  */
-Route::middleware('ordinadmin.check')->prefix('test11')->group(function (){
+Route::middleware('ordinadmin.check')->prefix('test11')->group(function (){//
     Route::post('admin','Login\LoginController@admin');
 
 });
@@ -50,6 +50,20 @@ Route::middleware('superadmin.check')->prefix('test22')->group(function (){
     Route::post('superadmin','Login\LoginController@superadmin');
 
 });
+/**
+ * test
+ */
+Route::prefix('ttt')->group(function (){
+    Route::post('asd','Login\LoginController@asd')->middleware('refreshToken');
+});
+
+/**
+ * 超管分配账号
+ */
+Route::prefix('superadmin')->group(function (){
+Route::post('assignaccount','SuperAdmin\AssignController@assign');
+});
+
 
 
 
@@ -130,5 +144,6 @@ Route::prefix('stu')->group(function (){
     Route::get('find','StuAdmin\StuController@find');   //实验室运行记录表添加
     Route::get('find1','StuAdmin\StuController@find1');   //实验室运行记录表查询
 });//--wzh
+
 
 
