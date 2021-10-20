@@ -68,7 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.rolecheck' =>\App\Http\Middleware\AuthorityAuthentication::class,
-        //'auth.check' => \App\Http\Middleware\RefreshToken::class,
+        'refreshToken' => \App\Http\Middleware\RefreshToken::class,
         'student.check' => \App\Http\Middleware\Checkrolestate::class,
         'ordinadmin.check' => \App\Http\Middleware\Checkadmin::class,
         'superadmin.check' => \App\Http\Middleware\Checksuperadmin::class,
