@@ -7,7 +7,7 @@ use App\Http\Requests\StuAdmin\BorrowAdd;
 use App\Http\Requests\StuAdmin\BorrowChange;
 use App\Http\Requests\StuAdmin\BorrowDelete;
 use App\Http\Requests\StuAdmin\BorrowLook;
-use App\Http\Requests\StuAdmin\Equipmentadd;
+use App\Http\Requests\StuAdmin\EquipmentAdd;
 use App\Http\Requests\StuAdmin\EquipmentChange;
 use App\Http\Requests\StuAdmin\EquipmentDelete;
 use App\Http\Requests\StuAdmin\EquipmentLook;
@@ -32,11 +32,11 @@ use Illuminate\Support\Facades\DB;
 class StuController extends Controller
 {
     /** * 设备借用表增加数据
-     * @param Equipmentadd $request
+     * @param EquipmentAdd $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function equipment_add(Equipmentadd $request)
+    public function equipment_add(EquipmentAdd $request)
     {
         $form_id = 'A'.date("ymdis");    //获取form_id编号
         $form_name_id='1';
