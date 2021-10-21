@@ -16,14 +16,14 @@ class Positionform extends Model
     {
 
         try {
-            $res = Positionform::select('id','student_position')
+            $res = Positionform::select('id','positions')
                 ->where('id','<>',5)
                 ->get();
             return $res ?
                 $res :
                 false;
         } catch (\Exception $e) {
-            logError('存储个人信息失败！', [$e->getMessage()]);
+            logError('查询失败！', [$e->getMessage()]);
             return false;
         }
     }

@@ -23,7 +23,7 @@ class Checksuperadmin
         {
             return abort(403,'抱歉，你没有权限访问！');
         }
-        if($data['state_id'] != 1 && $data['state_id'] != 2)
+        if($data['account_id'] != 1 && $data['account_id'] != 3)
         {
             return abort(403,'你的账号已禁用！');
         }

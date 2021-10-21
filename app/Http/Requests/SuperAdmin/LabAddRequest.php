@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\UserInfo;
+namespace App\Http\Requests\SuperAdmin;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class Registered extends FormRequest
+class LabAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +26,8 @@ class Registered extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required',
-            'login_number' => 'required',
-            'position_id' => 'required',
-            'register_name' => 'required',
-            'register_email' => 'required|email',
-            'register_phone' => 'required'
-
+            'lab_id' => 'required',
+            'lab_name' => 'required',
         ];
     }
     protected function failedValidation(Validator $validator){
