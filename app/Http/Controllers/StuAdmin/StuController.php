@@ -25,6 +25,8 @@ use App\Models\Equipment;
 use App\Models\Form;
 use App\Models\Lists;
 use App\Models\Open;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class StuController extends Controller
@@ -38,7 +40,7 @@ class StuController extends Controller
     {
         $form_id = 'A'.date("ymdis");    //获取form_id编号
         $form_name_id='1';
-        $login_id = 2;     //获取学生的login_id
+        $login_id = auth('api')->user()->id;
         $form_state1=0;
         $form_state2=0;
         $form_state3=0;
@@ -152,7 +154,7 @@ class StuController extends Controller
     {
         $form_id = 'B'.date("ymdis");    //获取form_id编号
         $form_name_id='2';
-        $login_id = 2;     //获取学生的login_id
+        $login_id = auth('api')->user()->id;     //获取学生的login_id
         $form_state1=0;
         $form_state2=0;
         $form_state3=0;
@@ -252,7 +254,7 @@ class StuController extends Controller
     {
         $form_id = 'C'.date("ymdis");    //获取form_id编号
         $form_name_id='3';
-        $login_id = 2;     //获取学生的login_id
+        $login_id = auth('api')->user()->id;     //获取学生的login_id
         $form_state1=0;
         $form_state2=0;
         $form_state3=0;
@@ -354,7 +356,7 @@ class StuController extends Controller
     {
         $form_id = 'D'.date("ymdis");    //获取form_id编号
         $form_name_id='3';
-        $login_id = 2;     //获取学生的login_id
+        $login_id = auth('api')->user()->id;   //获取学生的login_id
         $form_state1=0;
         $form_state2=0;
         $form_state3=0;
