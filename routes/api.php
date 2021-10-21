@@ -73,4 +73,3 @@ Route::prefix('stu')->group(function (){
     Route::get('find','StuAdmin\StuController@find');   //实验室运行记录表添加
     Route::get('find1','StuAdmin\StuController@find1');   //实验室运行记录表查询
 });//--wzh
-Route::get('text','StuAdmin\StuController@text');   //实验室运行记录表查询
