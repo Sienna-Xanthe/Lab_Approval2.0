@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Http\Requests\SuperAdmin\addAdminRequest;
 use App\Http\Requests\SuperAdmin\modifyPassword2Request;
 use App\Http\Requests\SuperAdmin\renewAdminStateRequest;
 use App\Http\Requests\SuperAdmin\showAllPositionRequest;
@@ -113,10 +114,10 @@ class ManagementStuController
 
     /**
      * 添加管理员的个人信息
-     * @param  Request  $request
+     * @param  addAdminRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addAdmin(Request $request)
+    public function addAdmin(addAdminRequest $request)
     {
         $name  = $request['name'];
         $email = $request['email'];
