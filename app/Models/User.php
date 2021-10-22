@@ -12,7 +12,6 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
 {
     //
     use Notifiable;
-
     public $table = 'login';
     protected $remeberTokenName = NULL;
     protected $guarded = [];
@@ -126,7 +125,5 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject,Authen
         $identifier_name = $this->getAuthIdentifierName();
         return $this->attributes[$identifier_name];
     }
-
-
 
 }
